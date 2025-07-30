@@ -24,7 +24,7 @@ jobs:
         run: zip -r pandas_layer.zip python
 
       - name: Upload layer zip as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pandas-layer
           path: pandas_layer.zip
