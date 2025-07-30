@@ -1,0 +1,30 @@
+name: Build Pandas Lambda Layer
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-layer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install pandas in 'python/' folder
+        run: |
+          mkdir python
+          pip install pandas -t python/
+
+      - name: Zip the layer
+        run: zip -r pandas_layer.zip python
+
+      - name: Upload layer zip as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pandas-layer
+          path: pandas_layer.zip
